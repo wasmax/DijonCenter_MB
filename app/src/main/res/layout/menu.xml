@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/pois"
+        android:title="Les POIS"/>
+
+    <item android:id="@+id/parcours"
+        android:title="Mes Parcours" />
+
+    <item android:id="@+id/quitter"
+        android:title="Quitter" />
+</menu>

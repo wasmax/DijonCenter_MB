@@ -1,9 +1,11 @@
 package com.example.barthelemy.dijoncenter_mb.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Max on 08/09/2017.
  */
-public class Position {
+public class Position implements Serializable {
 
     public Position(Float lat, Float lon) {
         this.lat = lat;

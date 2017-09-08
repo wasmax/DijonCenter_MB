@@ -1,10 +1,14 @@
 package com.example.barthelemy.dijoncenter_mb.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by Max on 08/09/2017.
  */
-public class Pois {
-
+public class Pois implements Serializable{
     String id;
     String type;
     String name;

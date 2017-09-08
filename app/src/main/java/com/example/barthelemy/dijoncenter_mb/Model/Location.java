@@ -1,9 +1,11 @@
 package com.example.barthelemy.dijoncenter_mb.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Max on 08/09/2017.
  */
-public class Location {
+public class Location implements Serializable {
 
     public String getAddress() {
         return address;

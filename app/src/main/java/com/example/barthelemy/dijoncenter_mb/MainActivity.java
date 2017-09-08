@@ -1,13 +1,20 @@
 package com.example.barthelemy.dijoncenter_mb;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.MainThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.barthelemy.dijoncenter_mb.Adapters.PoisAdapter;
 import com.example.barthelemy.dijoncenter_mb.Model.Location;
@@ -28,15 +35,29 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Pois> allPois;
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        lv = (ListView)findViewById(R.id.listView);
         allPois = new ArrayList<Pois>();
 
         callAPi();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a,
+                                    View v, int position, long id) {
+
+                Pois pois = (Pois)a.getItemAtPosition(position);
+                Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                intent.putExtra("pois", pois);
+                startActivity(intent);
+            }
+        });
     }
 
     private static final String URL_API = "https://my-json-server.typicode.com/lpotherat/pois/pois";
@@ -100,5 +121,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.layout.menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //On regarde quel item a été cliqué grâce à son id et on déclenche une action
+        switch (item.getItemId()) {
+            case R.id.pois:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                Toast.makeText(this, "Les Pois", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.parcours:
+                Intent intent2 = new Intent(this, ParcoursActivity.class);
+                startActivity(intent2);
+                Toast.makeText(this, "Mes Parcours", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.quitter:
+                finish();
+                return true;
+        }
+        return false;
     }
 }
