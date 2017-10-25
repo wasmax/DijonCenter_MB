@@ -57,11 +57,13 @@ public class ParcoursActivity extends AppCompatActivity {
 
         DiiageBaseDb myDb = new DiiageBaseDb(this);
         SQLiteDatabase db = myDb.getWritableDatabase();
-        ParcoursAdapter pa = new ParcoursAdapter(db, ParcoursActivity.this);
 
-        ArrayAdapter<Parcours> adapter = new ArrayAdapter<Parcours>(this,
-                    android.R.layout.simple_list_item_1, pa.getAllParcours());
-        lv.setAdapter(adapter);
+        ParcoursAdapter pa = new ParcoursAdapter(db, ParcoursActivity.this);
+        lv.setAdapter(pa);
+
+        //ArrayAdapter<Parcours> adapter = new ArrayAdapter<Parcours>(this,
+                    //android.R.layout.simple_list_item_1, pa.getAllParcours());
+        //lv.setAdapter(adapter);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,12 +81,12 @@ public class ParcoursActivity extends AppCompatActivity {
             case R.id.pois:
                 Intent intent1 = new Intent(this, MainActivity.class);
                 startActivity(intent1);
-                Toast.makeText(this, "Les Pois", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.pois, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.parcours:
                 Intent intent2 = new Intent(this, ParcoursActivity.class);
                 startActivity(intent2);
-                Toast.makeText(this, "Mes Parcours", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.parcours, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.quitter:
                 finish();

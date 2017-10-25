@@ -22,8 +22,8 @@ public class DiiageBaseDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE Parcours ( "
                 + "id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " idCinema VARCHAR NOT NULL ," +
-                " idRestaurant VARCHAR NOT NULL ," +
+                " nomCinema VARCHAR NOT NULL ," +
+                " nomRestaurant VARCHAR NOT NULL ," +
                 " date_creation DATE NOT NULL ," +
                 " date_realisation DATE NOT NULL ," +
                 " commentaire VARCHAR NOT NULL ," +

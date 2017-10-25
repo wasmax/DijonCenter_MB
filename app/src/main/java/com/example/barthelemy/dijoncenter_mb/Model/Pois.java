@@ -40,6 +40,8 @@ public class Pois implements Serializable{
         this.position = position;
     }
 
+    public Pois() {  }
+
     public String getId() {
         return id;
     }

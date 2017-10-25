@@ -7,16 +7,16 @@ import java.util.Date;
  */
 
 public class Parcours {
-    String idCinema;
-    String idRestaurant;
+    String nomCinema;
+    String nomRestaurant;
     String dateCreation;
     String dateRealisation;
     String commentaire;
     String statut;
 
-    public Parcours(String idCinema, String idRestaurant, String dateCreation, String dateRealisation, String commentaire, String statut) {
-        this.idCinema = idCinema;
-        this.idRestaurant = idRestaurant;
+    public Parcours(String nomCinema, String nomRestaurant, String dateCreation, String dateRealisation, String commentaire, String statut) {
+        this.nomCinema = nomCinema;
+        this.nomRestaurant = nomRestaurant;
         this.dateCreation = dateCreation;
         this.dateRealisation = dateRealisation;
         this.commentaire = commentaire;
@@ -24,19 +24,19 @@ public class Parcours {
     }
 
     public String getIdCinema() {
-        return idCinema;
+        return nomCinema;
     }
 
     public void setIdCinema(String idCinema) {
-        this.idCinema = idCinema;
+        this.nomCinema = idCinema;
     }
 
     public String getIdRestaurant() {
-        return idRestaurant;
+        return nomRestaurant;
     }
 
     public void setIdRestaurant(String idRestaurant) {
-        this.idRestaurant = idRestaurant;
+        this.nomRestaurant = idRestaurant;
     }
 
     public String getDateCreation() {

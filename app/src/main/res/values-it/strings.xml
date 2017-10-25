@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DijonCenter_MB</string>
+    <string name="bienvenue">Ciao</string>
+    <string name="parcours">Percorsi</string>
+    <string name="pois">Punto di Interesse</string>
+    <string name="quitter">Lasciare</string>
+</resources>

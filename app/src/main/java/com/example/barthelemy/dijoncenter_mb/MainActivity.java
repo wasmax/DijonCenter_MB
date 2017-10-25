@@ -1,10 +1,19 @@
 package com.example.barthelemy.dijoncenter_mb;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.provider.Telephony;
 import android.support.annotation.MainThread;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsMessage;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +29,7 @@ import com.example.barthelemy.dijoncenter_mb.Adapters.PoisAdapter;
 import com.example.barthelemy.dijoncenter_mb.Model.Location;
 import com.example.barthelemy.dijoncenter_mb.Model.Pois;
 import com.example.barthelemy.dijoncenter_mb.Model.Position;
+import com.example.barthelemy.dijoncenter_mb.Receivers.BatteryReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,11 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Pois> allPois;
     ListView lv;
+    BatteryReceiver batRec;
+
+    private BroadcastReceiver mSmsBroadcastReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context arg0, Intent intent) {
+            Toast.makeText(MainActivity.this, "Message reçu", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        batRec = new BatteryReceiver();
+
+        Toast.makeText(this, R.string.bienvenue, Toast.LENGTH_SHORT).show();
 
         lv = (ListView)findViewById(R.id.listView);
         allPois = new ArrayList<Pois>();
@@ -58,6 +80,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED)
+        {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.RECEIVE_SMS)) {
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECEIVE_SMS},
+                        0);
+            }
+        }
     }
 
     private static final String URL_API = "https://my-json-server.typicode.com/lpotherat/pois/pois";
@@ -138,12 +173,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.pois:
                 Intent intent1 = new Intent(this, MainActivity.class);
                 startActivity(intent1);
-                Toast.makeText(this, "Les Pois", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.pois, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.parcours:
                 Intent intent2 = new Intent(this, ParcoursActivity.class);
                 startActivity(intent2);
-                Toast.makeText(this, "Mes Parcours", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.parcours, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.quitter:
                 finish();
@@ -151,4 +186,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
 }

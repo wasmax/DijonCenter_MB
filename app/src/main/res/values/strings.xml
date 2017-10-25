@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DijonCenter_MB</string>
+    <string name="bienvenue">Bienvenue</string>
+    <string name="parcours">Les Parcours</string>
+    <string name="pois">Les Pois</string>
+    <string name="quitter">Quitter</string>
 </resources>

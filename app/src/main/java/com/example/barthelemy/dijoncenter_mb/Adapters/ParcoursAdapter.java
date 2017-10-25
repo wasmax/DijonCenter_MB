@@ -41,7 +41,7 @@ public class ParcoursAdapter extends BaseAdapter {
 
     public ArrayList<Parcours> getAllParcours() {
 
-        Cursor c = db.query("parcours", new String[]{"id", "idCinema", "idRestaurant", "date_creation", "date_realisation", "commentaire", "statut"}, //table
+        Cursor c = db.query("parcours", new String[]{"id", "nomCinema", "nomRestaurant", "date_creation", "date_realisation", "commentaire", "statut"}, //table
                 null,
                 null, //parametre de selection
                 null, //order
@@ -62,7 +62,7 @@ public class ParcoursAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return list.size();
     }
 
     @Override
@@ -79,19 +79,20 @@ public class ParcoursAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             view = LayoutInflater.from(context).
-                    inflate(R.layout.layout_list_view_row_items, viewGroup, false);
+                    inflate(R.layout.layout_list_view_row_items_parcours, viewGroup, false);
         }
 
         Parcours current = list.get(i);
+        PoisAdapter pa = new PoisAdapter();
 
         TextView textViewItemName = (TextView)
-                view.findViewById(R.id.text_view_item_name);
+                view.findViewById(R.id.text_view_item_name_p);
         TextView textViewItemAuthor = (TextView)
-                view.findViewById(R.id.text_view_item_description);
+                view.findViewById(R.id.text_view_item_description_p);
         TextView textViewItemDescription = (TextView)
-                view.findViewById(R.id.text_view_item_address);
+                view.findViewById(R.id.text_view_item_address_p);
 
-        String dataTitle = "Cinéma : " + current.getIdCinema().toString() + " & Restaurant : " + current.getIdRestaurant().toString();
+        String dataTitle = current.getIdCinema() + " & " + current.getIdRestaurant();
         String dataAuth = current.getCommentaire();
         String dataGenre = "Le : " + current.getDateRealisation().toString() + " / Statut : " + current.getStatut();
 

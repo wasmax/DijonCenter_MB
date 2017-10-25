@@ -6,12 +6,17 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.barthelemy.dijoncenter_mb.Adapters.PoisAdapter;
 import com.example.barthelemy.dijoncenter_mb.Database.DiiageBaseDb;
@@ -131,8 +136,8 @@ public class AddParcoursActivity extends AppCompatActivity {
                 }.execute();
 
 
-                String insert = "INSERT INTO parcours ('idCinema', 'IdRestaurant','date_creation', 'date_realisation', 'commentaire', 'statut') " +
-                        "VALUES ('"+idCine+"', '"+idResto+"', 'datetime()', '"+et.getText()+"', '"+etComm.getText()+"', '"+spnStatus.getSelectedItem().toString()+"')";
+                String insert = "INSERT INTO parcours ('nomCinema', 'nomRestaurant','date_creation', 'date_realisation', 'commentaire', 'statut') " +
+                        "VALUES ('"+spnCine.getSelectedItem().toString()+"', '"+spnResto.getSelectedItem().toString()+"', 'datetime()', '"+et.getText()+"', '"+etComm.getText()+"', '"+spnStatus.getSelectedItem().toString()+"')";
                 db.execSQL(insert);
 
                 Intent i = new Intent(AddParcoursActivity.this, ParcoursActivity.class);
@@ -204,5 +209,34 @@ public class AddParcoursActivity extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.layout.menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //On regarde quel item a été cliqué grâce à son id et on déclenche une action
+        switch (item.getItemId()) {
+            case R.id.pois:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                Toast.makeText(this, R.string.pois, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.parcours:
+                Intent intent2 = new Intent(this, ParcoursActivity.class);
+                startActivity(intent2);
+                Toast.makeText(this, R.string.parcours, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.quitter:
+                finish();
+                return true;
+        }
+        return false;
     }
 }

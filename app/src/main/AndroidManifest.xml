@@ -3,6 +3,7 @@
     package="com.example.barthelemy.dijoncenter_mb">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,6 +28,20 @@
 
         <activity android:name=".ParcoursActivity" />
         <activity android:name=".AddParcoursActivity"></activity>
+
+        <receiver android:name=".Receivers.BatteryReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW"></action>
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".Receivers.SmsReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
