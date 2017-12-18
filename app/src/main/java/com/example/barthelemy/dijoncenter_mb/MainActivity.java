@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Telephony;
 import android.support.annotation.MainThread;
@@ -137,13 +139,42 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject location = obj.getJSONObject("location");
                         JSONObject position = location.getJSONObject("position");
 
-                        allPois.add(
-                                new Pois(
-                                        obj.getString("id"),
-                                        obj.getString("type"),
-                                        obj.getString("name"),
-                                        new Location(location.getString("adress"), location.getString("postalCode"), location.getString("city")),
-                                        new Position(Float.parseFloat(position.getString("lat")), Float.parseFloat(position.getString("lon")))));
+                        Intent intent = getIntent();
+                        String typePois = intent.getStringExtra("typeRestos");
+
+                        if(typePois.equals("regime")){
+                            if(obj.getString("name").equals("Ekin Kebab")
+                                    || obj.getString("name").equals("Quick")
+                                    || obj.getString("name").equals("Subway")
+                                    || obj.getString("name").equals("La Boîte à Pasta")
+                                    || obj.getString("name").equals("Boludo Empanadas")) {
+                            }else{
+
+                                allPois.add(
+                                        new Pois(
+                                                obj.getString("id"),
+                                                obj.getString("type"),
+                                                obj.getString("name"),
+                                                new Location(location.getString("adress"), location.getString("postalCode"), location.getString("city")),
+                                                new Position(Float.parseFloat(position.getString("lat")), Float.parseFloat(position.getString("lon")))));
+                            }
+                        }
+                        else if(typePois.equals("gras")){
+                            if(obj.getString("name").equals("Ekin Kebab")
+                                    || obj.getString("name").equals("Quick")
+                                    || obj.getString("name").equals("Subway")
+                                    || obj.getString("name").equals("La Boîte à Pasta")
+                                    || obj.getString("name").equals("Boludo Empanadas")){
+
+                                allPois.add(
+                                        new Pois(
+                                                obj.getString("id"),
+                                                obj.getString("type"),
+                                                obj.getString("name"),
+                                                new Location(location.getString("adress"), location.getString("postalCode"), location.getString("city")),
+                                                new Position(Float.parseFloat(position.getString("lat")), Float.parseFloat(position.getString("lon")))));
+                            }
+                        }
                     }
 
 

@@ -4,4 +4,6 @@
     <string name="parcours">Les Parcours</string>
     <string name="pois">Les Pois</string>
     <string name="quitter">Quitter</string>
+
+    <string name="app_sante">myhealthbarthelemy</string>
 </resources>
